@@ -121,32 +121,32 @@ static NSString *_defaultService;
 
 #pragma mark -
 
-+ (NSString *)stringForKey:(NSString *)key
++ (NSMutableString *)stringForKey:(NSString *)key
 {
     return [self stringForKey:key service:nil accessGroup:nil error:nil];
 }
 
-+ (NSString *)stringForKey:(NSString *)key error:(NSError *__autoreleasing *)error
++ (NSMutableString *)stringForKey:(NSString *)key error:(NSError *__autoreleasing *)error
 {
     return [self stringForKey:key service:nil accessGroup:nil error:error];
 }
 
-+ (NSString *)stringForKey:(NSString *)key service:(NSString *)service
++ (NSMutableString *)stringForKey:(NSString *)key service:(NSString *)service
 {
     return [self stringForKey:key service:service accessGroup:nil error:nil];
 }
 
-+ (NSString *)stringForKey:(NSString *)key service:(NSString *)service error:(NSError *__autoreleasing *)error
++ (NSMutableString *)stringForKey:(NSString *)key service:(NSString *)service error:(NSError *__autoreleasing *)error
 {
     return [self stringForKey:key service:service accessGroup:nil error:error];
 }
 
-+ (NSString *)stringForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup
++ (NSMutableString *)stringForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup
 {
     return [self stringForKey:key service:service accessGroup:accessGroup error:nil];
 }
 
-+ (NSString *)stringForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError *__autoreleasing *)error
++ (NSMutableString *)stringForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError *__autoreleasing *)error
 {
     if (!key) {
         NSError *e = [self argumentError:NSLocalizedString(@"the key must not to be nil", nil)];
@@ -238,32 +238,32 @@ static NSString *_defaultService;
 
 #pragma mark -
 
-+ (NSData *)dataForKey:(NSString *)key
++ (NSMutableData *)dataForKey:(NSString *)key
 {
     return [self dataForKey:key service:nil accessGroup:nil error:nil];
 }
 
-+ (NSData *)dataForKey:(NSString *)key error:(NSError *__autoreleasing *)error
++ (NSMutableData *)dataForKey:(NSString *)key error:(NSError *__autoreleasing *)error
 {
     return [self dataForKey:key service:nil accessGroup:nil error:error];
 }
 
-+ (NSData *)dataForKey:(NSString *)key service:(NSString *)service
++ (NSMutableData *)dataForKey:(NSString *)key service:(NSString *)service
 {
     return [self dataForKey:key service:service accessGroup:nil error:nil];
 }
 
-+ (NSData *)dataForKey:(NSString *)key service:(NSString *)service error:(NSError *__autoreleasing *)error
++ (NSMutableData *)dataForKey:(NSString *)key service:(NSString *)service error:(NSError *__autoreleasing *)error
 {
     return [self dataForKey:key service:service accessGroup:nil error:error];
 }
 
-+ (NSData *)dataForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup
++ (NSMutableData *)dataForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup
 {
     return [self dataForKey:key service:service accessGroup:accessGroup error:nil];
 }
 
-+ (NSData *)dataForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError *__autoreleasing *)error
++ (NSMutableData *)dataForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError *__autoreleasing *)error
 {
     if (!key) {
         NSError *e = [self argumentError:NSLocalizedString(@"the key must not to be nil", nil)];
@@ -367,16 +367,16 @@ static NSString *_defaultService;
 
 #pragma mark -
 
-- (NSString *)stringForKey:(id)key
+- (NSMutableString *)stringForKey:(id)key
 {
     return [self stringForKey:key error:nil];
 }
 
-- (NSString *)stringForKey:(id)key error:(NSError *__autoreleasing *)error
+- (NSMutableString *)stringForKey:(id)key error:(NSError *__autoreleasing *)error
 {
-    NSData *data = [self dataForKey:key error:error];
+    NSMutableData *data = [self dataForKey:key error:error];
     if (data) {
-        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSMutableString *string = [[NSMutableString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if (string) {
             return string;
         }
@@ -440,12 +440,12 @@ static NSString *_defaultService;
 
 #pragma mark -
 
-- (NSData *)dataForKey:(NSString *)key
+- (NSMutableData *)dataForKey:(NSString *)key
 {
     return [self dataForKey:key error:nil];
 }
 
-- (NSData *)dataForKey:(NSString *)key error:(NSError *__autoreleasing *)error
+- (NSMutableData *)dataForKey:(NSString *)key error:(NSError *__autoreleasing *)error
 {
     NSMutableDictionary *query = [self query];
     query[(__bridge __strong id)kSecMatchLimit] = (__bridge id)kSecMatchLimitOne;
@@ -457,9 +457,8 @@ static NSString *_defaultService;
     OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &data);
     
     if (status == errSecSuccess) {
-        NSData *ret = [NSData dataWithData:(__bridge NSData *)data];
         if (data) {
-            CFRelease(data);
+            NSMutableData *ret = (__bridge_transfer NSMutableData *)data;
             return ret;
         } else {
             NSError *e = [self.class unexpectedError:NSLocalizedString(@"Unexpected error has occurred.", nil)];

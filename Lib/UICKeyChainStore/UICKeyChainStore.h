@@ -118,16 +118,16 @@ __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_8_0);
 - (instancetype)initWithServer:(NSURL *)server protocolType:(UICKeyChainStoreProtocolType)protocolType;
 - (instancetype)initWithServer:(NSURL *)server protocolType:(UICKeyChainStoreProtocolType)protocolType authenticationType:(UICKeyChainStoreAuthenticationType)authenticationType;
 
-+ (NSString *)stringForKey:(NSString *)key;
-+ (NSString *)stringForKey:(NSString *)key service:(NSString *)service;
-+ (NSString *)stringForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup;
++ (NSMutableString *)stringForKey:(NSString *)key;
++ (NSMutableString *)stringForKey:(NSString *)key service:(NSString *)service;
++ (NSMutableString *)stringForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup;
 + (BOOL)setString:(NSString *)value forKey:(NSString *)key;
 + (BOOL)setString:(NSString *)value forKey:(NSString *)key service:(NSString *)service;
 + (BOOL)setString:(NSString *)value forKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup;
 
-+ (NSData *)dataForKey:(NSString *)key;
-+ (NSData *)dataForKey:(NSString *)key service:(NSString *)service;
-+ (NSData *)dataForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup;
++ (NSMutableData *)dataForKey:(NSString *)key;
++ (NSMutableData *)dataForKey:(NSString *)key service:(NSString *)service;
++ (NSMutableData *)dataForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup;
 + (BOOL)setData:(NSData *)data forKey:(NSString *)key;
 + (BOOL)setData:(NSData *)data forKey:(NSString *)key service:(NSString *)service;
 + (BOOL)setData:(NSData *)data forKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup;
@@ -136,11 +136,11 @@ __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_8_0);
 
 - (BOOL)setString:(NSString *)string forKey:(NSString *)key;
 - (BOOL)setString:(NSString *)string forKey:(NSString *)key label:(NSString *)label comment:(NSString *)comment;
-- (NSString *)stringForKey:(NSString *)key;
+- (NSMutableString *)stringForKey:(NSString *)key;
 
 - (BOOL)setData:(NSData *)data forKey:(NSString *)key;
 - (BOOL)setData:(NSData *)data forKey:(NSString *)key label:(NSString *)label comment:(NSString *)comment;
-- (NSData *)dataForKey:(NSString *)key;
+- (NSMutableData *)dataForKey:(NSString *)key;
 
 + (BOOL)removeItemForKey:(NSString *)key;
 + (BOOL)removeItemForKey:(NSString *)key service:(NSString *)service;
@@ -183,17 +183,17 @@ __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
 @interface UICKeyChainStore (ErrorHandling)
 
-+ (NSString *)stringForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
-+ (NSString *)stringForKey:(NSString *)key service:(NSString *)service error:(NSError * __autoreleasing *)error;
-+ (NSString *)stringForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError * __autoreleasing *)error;
++ (NSMutableString *)stringForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
++ (NSMutableString *)stringForKey:(NSString *)key service:(NSString *)service error:(NSError * __autoreleasing *)error;
++ (NSMutableString *)stringForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError * __autoreleasing *)error;
 
 + (BOOL)setString:(NSString *)value forKey:(NSString *)key error:(NSError * __autoreleasing *)error;
 + (BOOL)setString:(NSString *)value forKey:(NSString *)key service:(NSString *)service error:(NSError * __autoreleasing *)error;
 + (BOOL)setString:(NSString *)value forKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError * __autoreleasing *)error;
 
-+ (NSData *)dataForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
-+ (NSData *)dataForKey:(NSString *)key service:(NSString *)service error:(NSError * __autoreleasing *)error;
-+ (NSData *)dataForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError * __autoreleasing *)error;
++ (NSMutableData *)dataForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
++ (NSMutableData *)dataForKey:(NSString *)key service:(NSString *)service error:(NSError * __autoreleasing *)error;
++ (NSMutableData *)dataForKey:(NSString *)key service:(NSString *)service accessGroup:(NSString *)accessGroup error:(NSError * __autoreleasing *)error;
 
 + (BOOL)setData:(NSData *)data forKey:(NSString *)key error:(NSError * __autoreleasing *)error;
 + (BOOL)setData:(NSData *)data forKey:(NSString *)key service:(NSString *)service error:(NSError * __autoreleasing *)error;
@@ -205,8 +205,8 @@ __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 - (BOOL)setData:(NSData *)data forKey:(NSString *)key error:(NSError * __autoreleasing *)error;
 - (BOOL)setData:(NSData *)data forKey:(NSString *)key label:(NSString *)label comment:(NSString *)comment error:(NSError * __autoreleasing *)error;
 
-- (NSString *)stringForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
-- (NSData *)dataForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
+- (NSMutableString *)stringForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
+- (NSMutableData *)dataForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
 
 + (BOOL)removeItemForKey:(NSString *)key error:(NSError * __autoreleasing *)error;
 + (BOOL)removeItemForKey:(NSString *)key service:(NSString *)service error:(NSError * __autoreleasing *)error;
